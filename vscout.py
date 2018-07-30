@@ -5,6 +5,12 @@ import npyscreen
 class VictiScout(npyscreen.NPSApp):
     def main(self):
         form = npyscreen.Form(name="VictiScout",)
+        self.special = {
+            'team': form.add(npyscreen.TitleText, name='Team #'),
+            'match': form.add(npyscreen.TitleSlider, name='Match #'),
+            'alliance': form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue']),
+            'start-position': form.add(npyscreen.TitleSelectOne, name='Start Position', values=['Left', 'Center', 'Right']),
+        }
         self.inputs = {
             'auto-line': form.add(npyscreen.Checkbox, name='AUTO Crossed Line'),
             # TODO: These really shouldn't be sliders.
@@ -19,7 +25,7 @@ class VictiScout(npyscreen.NPSApp):
             'climb-assists': form.add(npyscreen.TitleSlider, out_of=2, name='Climb assists'),
 
             # TODO: Full advice
-            'notes': form.add(npyscreen.TitledMultiLine, name='Notes'),
+            'notes': form.add(npyscreen.TitleMultiLine, name='Notes'),
         }
         """text = form.add(npyscreen.TitleText, name="Text:",)
         filename = form.add(npyscreen.TitleFilename, name="Filename:")
