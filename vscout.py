@@ -10,8 +10,8 @@ class VictiScout(npyscreen.NPSApp):
             'team': form.add(npyscreen.TitleText, name='Team #'),
             # TODO: This might make sense as a slider if it actually adjusted its end to match the number of matches in the competition, but it would need WiFi.
             'match': form.add(npyscreen.TitleSlider, name='Match #'),
-            'alliance': form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue'], max_height=3),
-            'start-position': form.add(npyscreen.TitleSelectOne, name='Start', values=['Left', 'Center', 'Right'], max_height=4),
+            'alliance': form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue'], max_height=3, scroll_exit=True),
+            'start-position': form.add(npyscreen.TitleSelectOne, name='Start', values=['Left', 'Center', 'Right'], max_height=4, scroll_exit=True),
         }
         self.controls = {
             'submit': form.add(npyscreen.Button, name='Submit'),
