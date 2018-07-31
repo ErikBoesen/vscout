@@ -2,14 +2,19 @@
 
 import npyscreen
 
+
 class VictiScout(npyscreen.NPSApp):
     def main(self):
-        form = npyscreen.Form(name="VictiScout",)
+        form = npyscreen.Form(name='VictiScout',)
         self.special = {
             'team': form.add(npyscreen.TitleText, name='Team #'),
+            # TODO: This might make sense as a slider if it actually adjusted its end to match the number of matches in the competition, but it would need WiFi.
             'match': form.add(npyscreen.TitleSlider, name='Match #'),
-            'alliance': form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue']),
-            'start-position': form.add(npyscreen.TitleSelectOne, name='Start Position', values=['Left', 'Center', 'Right']),
+            'alliance': form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue'], max_height=3),
+            'start-position': form.add(npyscreen.TitleSelectOne, name='Start', values=['Left', 'Center', 'Right'], max_height=4),
+        }
+        self.controls = {
+            'submit': form.add(npyscreen.Button, name='Submit'),
         }
         self.inputs = {
             'auto-line': form.add(npyscreen.Checkbox, name='AUTO Crossed Line'),
