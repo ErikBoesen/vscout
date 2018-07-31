@@ -3,51 +3,52 @@
 import npyscreen
 
 
-class VictiScout(npyscreen.NPSApp):
+class VictiScout(npyscreen.NPSAppManaged):
+
     def main(self):
-        form = npyscreen.Form(name='VictiScout',)
+        self.form = npyscreen.Form(name='VictiScout',)
         self.special = {
-            'team': form.add(npyscreen.TitleText, name='Team #'),
+            'team': self.form.add(npyscreen.TitleText, name='Team #'),
             # TODO: This might make sense as a slider if it actually adjusted its end to match the number of matches in the competition, but it would need WiFi.
-            'match': form.add(npyscreen.TitleSlider, name='Match #'),
-            'alliance': form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue'], max_height=3, scroll_exit=True),
-            'start-position': form.add(npyscreen.TitleSelectOne, name='Start', values=['Left', 'Center', 'Right'], max_height=4, scroll_exit=True),
+            'match': self.form.add(npyscreen.TitleSlider, name='Match #'),
+            'alliance': self.form.add(npyscreen.TitleSelectOne, name='Alliance', values=['Red', 'Blue'], max_height=3, scroll_exit=True),
+            'start-position': self.form.add(npyscreen.TitleSelectOne, name='Start', values=['Left', 'Center', 'Right'], max_height=4, scroll_exit=True),
         }
         self.controls = {
-            'submit': form.add(npyscreen.Button, name='Submit'),
+            'submit': self.form.add(npyscreen.Button, name='Submit'),
         }
         self.inputs = {
-            'auto-line': form.add(npyscreen.Checkbox, name='AUTO Crossed Line'),
+            'auto-line': self.form.add(npyscreen.Checkbox, name='AUTO Crossed Line'),
             # TODO: These really shouldn't be sliders.
-            'auto-scale': form.add(npyscreen.TitleSlider, out_of=8, name='AUTO Scale Cubes'),
-            'auto-switch': form.add(npyscreen.TitleSlider, out_of=8, name='AUTO Switch Cubes'),
+            'auto-scale': self.form.add(npyscreen.TitleSlider, out_of=8, name='AUTO Scale Cubes'),
+            'auto-switch': self.form.add(npyscreen.TitleSlider, out_of=8, name='AUTO Switch Cubes'),
 
-            'scale': form.add(npyscreen.TitleSlider, out_of=16, name='Scale Cubes'),
-            'switch': form.add(npyscreen.TitleSlider, out_of=16, name='Switch Cubes'),
-            'opposition-switch': form.add(npyscreen.TitleSlider, out_of=16, name='Opposition Switch Cubes'),
-            'vault': form.add(npyscreen.TitleSlider, out_of=10, name='Vault Cubes'),
-            'climbed': form.add(npyscreen.Checkbox, name='Climbed?'),
-            'climb-assists': form.add(npyscreen.TitleSlider, out_of=2, name='Climb assists'),
+            'scale': self.form.add(npyscreen.TitleSlider, out_of=16, name='Scale Cubes'),
+            'switch': self.form.add(npyscreen.TitleSlider, out_of=16, name='Switch Cubes'),
+            'opposition-switch': self.form.add(npyscreen.TitleSlider, out_of=16, name='Opposition Switch Cubes'),
+            'vault': self.form.add(npyscreen.TitleSlider, out_of=10, name='Vault Cubes'),
+            'climbed': self.form.add(npyscreen.Checkbox, name='Climbed?'),
+            'climb-assists': self.form.add(npyscreen.TitleSlider, out_of=2, name='Climb assists'),
 
             # TODO: Full advice
-            'notes': form.add(npyscreen.TitleMultiLine, name='Notes'),
+            'notes': self.form.add(npyscreen.TitleMultiLine, name='Notes'),
         }
-        """text = form.add(npyscreen.TitleText, name="Text:",)
-        filename = form.add(npyscreen.TitleFilename, name="Filename:")
-        filename_title = form.add(npyscreen.TitleFilenameCombo, name="Filename2:")
-        date = form.add(npyscreen.TitleDateCombo, name="Date:")
-        slider = form.add(npyscreen.TitleSlider, out_of=12, name="Slider")
-        multiline = form.add(npyscreen.MultiLineEdit,
-                             value="try typing here!\nMutiline text, press ^R to reformat.\n",
+        """text = self.form.add(npyscreen.TitleText, name="Text:",)
+        filename = self.form.add(npyscreen.TitleFilename, name="Filename:")
+        filename_title = self.form.add(npyscreen.TitleFilenameCombo, name="Filename2:")
+        date = self.form.add(npyscreen.TitleDateCombo, name="Date:")
+        slider = self.form.add(npyscreen.TitleSlider, out_of=12, name="Slider")
+        multiline = self.form.add(npyscreen.MultiLineEdit,
+                             value="try typing here!\nMutiline text, press ^R to reself.format.\n",
                              max_height=5, rely=9)
-        radio = form.add(npyscreen.TitleSelectOne, max_height=4, value=[1,], name="Pick One",
+        radio = self.form.add(npyscreen.TitleSelectOne, max_height=4, value=[1,], name="Pick One",
                          values=["Option1","Option2","Option3"], scroll_exit=True)
-        multiselect = form.add(npyscreen.TitleMultiSelect, max_height =-2, value=[1,], name="Pick Several",
+        multiselect = self.form.add(npyscreen.TitleMultiSelect, max_height =-2, value=[1,], name="Pick Several",
                                values=["Option1","Option2","Option3"], scroll_exit=True)
         """
 
         # This lets the user interact with the Form.
-        form.edit()
+        self.form.edit()
 
 if __name__ == "__main__":
     vs = VictiScout()
