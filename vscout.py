@@ -12,7 +12,7 @@ class VictisTheme(npyscreen.ThemeManager):
         'CURSOR_INVERSE': 'BLACK_WHITE',
         'LABEL'       : 'RED_BLACK',
         'LABELBOLD'   : 'WHITE_BLACK',
-        'CONTROL'     : 'YELLOW_BLACK',
+        'CONTROL'     : 'WHITE_BLACK',
         'IMPORTANT'   : 'GREEN_BLACK',
         'SAFE'        : 'GREEN_BLACK',
         'WARNING'     : 'YELLOW_BLACK',
