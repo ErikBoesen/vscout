@@ -36,15 +36,14 @@ class VictiScout(npyscreen.NPSAppManaged):
     def main(self):
         npyscreen.setTheme(VictisTheme)
         self.form = npyscreen.Form(name='VictiScout',)
-        self.special = {
-            'team': self.form.add(npyscreen.TitleText, name='Team #'),
-            # TODO: This might make sense as a slider if it actually adjusted its end to match the number of matches in the competition, but it would need WiFi.
-            'match': self.form.add(npyscreen.TitleSlider, name='Match #'),
-        }
         self.controls = {
             'submit': self.form.add(npyscreen.ButtonPress, name='Submit', when_pressed_function=self.store),
         }
+        # TODO: Reimplement position/alliance selectors to help scouts
         self.inputs = {
+            'team': self.form.add(npyscreen.TitleText, name='Team #'),
+            # TODO: This might make sense as a slider if it actually adjusted its end to match the number of matches in the competition, but it would need WiFi.
+            'match': self.form.add(npyscreen.TitleSlider, name='Match #'),
             'auto-line': self.form.add(npyscreen.Checkbox, name='AUTO Crossed Line'),
             # TODO: These really shouldn't be sliders.
             'auto-scale': self.form.add(npyscreen.TitleSlider, out_of=8, name='AUTO Scale Cubes'),
@@ -77,6 +76,20 @@ class VictiScout(npyscreen.NPSAppManaged):
         # This lets the user interact with the Form.
         self.form.edit()
 
+    def clear(self):
+        match = self.inputs['match'].value
+        for key in self.inputs.keys():
+            value_type = type(self.inputs[key].value)
+            if value_type == str:
+                self.inputs[key].value = ''
+            elif value_type == bool:
+                self.inputs[key].value = False
+            elif value_type == int or value_type == float:
+                # TODO: Support custom numerical input
+                self.inputs[key].value = 0
+            else:
+                print('                               ' + key)
+
     def store(self):
         match = {}
         for key in self.inputs.keys():
@@ -90,6 +103,7 @@ class VictiScout(npyscreen.NPSAppManaged):
         data.append(match)
         with open(DATA_PATH, 'w') as f:
             json.dump(data, f)
+        self.clear()
 
 if __name__ == "__main__":
     vs = VictiScout()
