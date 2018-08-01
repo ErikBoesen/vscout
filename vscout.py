@@ -38,7 +38,7 @@ class VictiScout(npyscreen.NPSAppManaged):
             'start-position': self.form.add(npyscreen.TitleSelectOne, name='Start', values=['Left', 'Center', 'Right'], max_height=4, scroll_exit=True),
         }
         self.controls = {
-            'submit': self.form.add(npyscreen.Button, name='Submit'),
+            'submit': self.form.add(npyscreen.ButtonPress, name='Submit', when_pressed_function=self.store),
         }
         self.inputs = {
             'auto-line': self.form.add(npyscreen.Checkbox, name='AUTO Crossed Line'),
@@ -72,6 +72,10 @@ class VictiScout(npyscreen.NPSAppManaged):
 
         # This lets the user interact with the Form.
         self.form.edit()
+
+    def store(self):
+        with open('/Users/boesen/vscout.json', 'w') as f:
+            f.write('it works!')
 
 if __name__ == "__main__":
     vs = VictiScout()
