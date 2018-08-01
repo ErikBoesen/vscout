@@ -79,16 +79,9 @@ class VictiScout(npyscreen.NPSAppManaged):
     def clear(self):
         match = self.inputs['match'].value
         for key in self.inputs.keys():
-            value_type = type(self.inputs[key].value)
-            if value_type == str:
-                self.inputs[key].value = ''
-            elif value_type == bool:
-                self.inputs[key].value = False
-            elif value_type == int or value_type == float:
-                # TODO: Support custom numerical input
-                self.inputs[key].value = 0
-            else:
-                print('                               ' + key)
+            self.inputs[key].value = None
+        # Refresh all inputs for npyscreen
+        self.form.display()
 
     def store(self):
         match = {}
