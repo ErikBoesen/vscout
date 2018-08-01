@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
 import npyscreen
+import os
+import json
+
+
+DATA_PATH = os.getenv('HOME') + '/scoutdata.json'
 
 class VictisTheme(npyscreen.ThemeManager):
     default_colors = {
@@ -12,6 +17,7 @@ class VictisTheme(npyscreen.ThemeManager):
         'CURSOR_INVERSE': 'BLACK_WHITE',
         'LABEL'       : 'RED_BLACK',
         'LABELBOLD'   : 'WHITE_BLACK',
+        # TODO: Choose a color other than white for CONTROL
         'CONTROL'     : 'WHITE_BLACK',
         'IMPORTANT'   : 'GREEN_BLACK',
         'SAFE'        : 'GREEN_BLACK',
@@ -74,8 +80,18 @@ class VictiScout(npyscreen.NPSAppManaged):
         self.form.edit()
 
     def store(self):
-        with open('/Users/boesen/vscout.json', 'w') as f:
-            f.write('it works!')
+        match = {}
+        for key in self.inputs.keys():
+            match[key] = self.inputs[key].value
+
+        if os.path.isfile(DATA_PATH):
+            with open(DATA_PATH, 'r') as f:
+                data = json.load(f)
+        else:
+            data = []
+        data.append(match)
+        with open(DATA_PATH, 'w') as f:
+            json.dump(data, f)
 
 if __name__ == "__main__":
     vs = VictiScout()
