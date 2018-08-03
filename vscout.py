@@ -74,12 +74,15 @@ class VictiScout(npyscreen.NPSAppManaged):
         """
 
         # This lets the user interact with the Form.
+        # TODO: npyscreen's documentation says with NSAppManaged this isn't necessary.
+        # If it's removed now, however, the form isn't opened. Need to investigate further.
         self.form.edit()
 
     def clear(self):
         match = self.inputs['match'].value
         for key in self.inputs.keys():
             self.inputs[key].value = None
+        self.inputs['match'].set_value(match + 1)
         # Refresh all inputs for npyscreen
         self.form.display()
 
